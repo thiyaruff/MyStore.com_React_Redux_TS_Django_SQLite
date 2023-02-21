@@ -149,6 +149,7 @@ class CreateCategoryView(APIView):
 
 @api_view(['POST'])
 def order(request):
+    print(request.data['total'])
     api_serializer=OrderSerializer(data={}, context={'user':request.user})
     if api_serializer.is_valid():
             api_serializer.save()

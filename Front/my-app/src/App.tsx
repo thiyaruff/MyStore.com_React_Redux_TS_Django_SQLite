@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Products from './features/adminProducts/Products';
-import Shop from './features/shop/Shop';
+import Shop from './features/shop_cart/Shop';
 import MyNav from './componnents/MyNav';
 import { Outlet } from 'react-router-dom';
 import Footer from './componnents/Footer';

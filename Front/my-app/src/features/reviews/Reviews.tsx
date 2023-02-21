@@ -61,7 +61,7 @@ useEffect(() => {
 
 
     </div>}
-    <PaypalPage/>
+   
     </div>
     
   );

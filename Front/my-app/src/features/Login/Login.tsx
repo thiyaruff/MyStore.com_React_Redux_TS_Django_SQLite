@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link, redirect } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import Shop from '../shop/Shop';
+import Cart from '../shop_cart/Cart';
+import Shop from '../shop_cart/Shop';
 import { loginAsync, selectUserName, selectLogged, logout } from './loginSlice';
 
 
@@ -19,7 +20,7 @@ export const Login = () => {
         <div>
 
             {logged ? 
-           <div><Shop></Shop></div>
+           <div><Cart/></div>
             :
     <div>
 

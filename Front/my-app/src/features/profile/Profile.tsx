@@ -1,6 +1,8 @@
+import { Box, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
-import { Button, InputGroup } from "react-bootstrap";
+import Button from '@mui/material/Button';
+import { InputGroup } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { loginAsync, logout, newLoginAsync, refreshAsync, selectAccess, selectLogged, selectUserName, selectUser_id } from "../Login/loginSlice";
 import Register from "../Login/Register";
@@ -28,14 +30,45 @@ const username= useAppSelector(selectUserName)
      
   return (
    
-    <div><div>
-        <InputGroup className="mb-3">
-       Adress: <input value={address} onChange={(e) => setadress(e.target.value)} />
-       Phone-Number: <input value={phone_number} onChange={(e) => setphone(e.target.value)} />
-       Age: <input value={age} onChange={(e) => setAge(+e.target.value)} />
-        <Button variant="info"onClick={() =>dispatch(addProfileAsync(({address,phone_number,age})))} >Add</Button>
-    </InputGroup></div>
-
+    <div>
+      
+       <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+      
+    
+        <TextField
+          id={address}
+          label="address"
+          type="adress"
+          onChange={(e) => setadress(e.target.value)}
+        />
+         <TextField
+          id={phone_number}
+          label="phone-number"
+          type="adressphone_number"
+          onChange={(e) => setphone(e.target.value)}
+        />
+        <TextField
+          id="outlined-number"
+          label="Age"
+          type="number"
+          onChange={(e) => setAge(+e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        </div>
+        </Box>
+        <Button variant="contained"onClick={() =>dispatch(addProfileAsync(({address,phone_number,age})))} >Save</Button>
+   
+    
     </div>
     
   )

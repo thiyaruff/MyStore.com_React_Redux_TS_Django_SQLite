@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { SERVER } from '../../server';
-import Cart from '../../model/Cart';
 
 export function addOrder(creds:any) {
   console.log(creds);

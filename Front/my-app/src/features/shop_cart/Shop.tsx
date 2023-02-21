@@ -17,6 +17,7 @@ const Shop = () => {
   const access = useAppSelector(selectAccess);
   useEffect(() => { dispatch(getAllProductsAsync()) }, []) 
   useEffect(() => {dispatch(initCart())}, [dispatch])
+  
   return (
     <div style={{display:"flex"}}>
    

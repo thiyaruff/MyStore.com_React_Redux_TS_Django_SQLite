@@ -26,12 +26,13 @@ const  MyNav = () => {
 borderBottom: "solid 1px", paddingBottom: "1rem", color:"white" }} expand="lg" collapseOnSelect>
              <Nav className="me-auto">
               <Link to={"/ProductAdmin"}>ProductAdmin</Link>|{" "}
-            <Link to="/Shop"><i className="fas fa-shopping-cart"></i>Cart</Link>|{" "}
+            <Link to="/Cart"><i className="fas fa-shopping-cart"></i>Cart</Link>|{" "}
             <Link to={"/Reviews"}>Reviews</Link>|{" "}  
             {logged ? (
                                 <NavDropdown title={userName} id='username'>
                               
-                                        <NavDropdown.Item> <Link to="/Profile">Add Profile</Link></NavDropdown.Item>
+                                        <NavDropdown.Item> <Link to="/Profile">Update Your Profile</Link></NavDropdown.Item>
+                                        <NavDropdown.Item> <Link to="/Order">My Orders</Link></NavDropdown.Item>
                                    
 
                                     <NavDropdown.Item  onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
