@@ -2,8 +2,9 @@ import { SERVER } from '../../server';
 import axios from 'axios'
 
 export function login(cred: any) {
-    return new Promise<{ data: any }>((resolve) =>
+    return new Promise<{ data: any }>((resolve,reject) =>
         axios.post(SERVER +"login/", cred).then(res => resolve({ data: res.data }))
+        .catch((error)=>reject(error.data))
     )
 }
 export function refreshUser(refresh:any) {
@@ -15,7 +16,8 @@ export function refreshUser(refresh:any) {
   }
 
 export function newLogin(cred: any) {
-    return new Promise<{ data: any }>((resolve) =>
+    return new Promise<{ data: any }>((resolve,reject) =>
     axios.post(SERVER + "register", cred).then(res => resolve({ data: res.data }))
+    .catch((error)=>reject(error.data))
     )
 }

@@ -1,12 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Form, InputGroup } from "react-bootstrap";
+import { Button, Col, Form } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import Products from "../adminProducts/Products";
-import { selectProduct } from "../adminProducts/productsSlice";
-import { loginAsync, logout, refreshAsync, selectAccess, selectLogged, selectUserName, selectUser_id } from "../Login/loginSlice";
+import {  logout, refreshAsync,  selectLogged, selectUserName } from "../Login/loginSlice";
 import { getMyOrderAsync, selectOrder } from '../order/orderSlice';
 import { addRviewAsync } from "./reviewsSlice";
+import{ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Reviews = () => {
@@ -18,15 +18,15 @@ const Reviews = () => {
   const [prod, setProd] = useState(0)
 
 
-  const access = useAppSelector(selectAccess)
+  
   const username = useAppSelector(selectUserName)
-  const product = useAppSelector(selectProduct)
+
 
   useEffect(() => {
 
-    const tmp: any = localStorage.getItem('refresh')
-    { tmp && dispatch(refreshAsync(tmp)) }
-    dispatch(getMyOrderAsync())
+    // const tmp: any = localStorage.getItem('refresh')
+    // { tmp && dispatch(refreshAsync(tmp)) }
+  
   }, [])
 
   useEffect(() => {
@@ -43,12 +43,14 @@ const Reviews = () => {
 
 
     <div>
-
+<ToastContainer/>
       {logged &&<div>
         hi {username}
                     <h1 style={{ textAlign: "center" }}>Reviews:
                     </h1>
                     <hr />
+                    <p>Choose product to review</p>
+                    <select onChange={(e) => setProd(+e.target.value)}>{myOrder.map((p:any)=><option key={p.id} value={p.product}>{p.desc}</option>)} </select>
                     <Form>
                     <Col xs={7}>
                     <Form.Group className="g-2" controlId="formBasicrating">
@@ -64,7 +66,6 @@ const Reviews = () => {
                         
                         </Col>
                     </Form>
-                    <select onChange={(e) => setProd(+e.target.value)}>{myOrder.map((p:any)=><option key={p.id} value={p.product}>{p.desc}</option>)} </select>
                     <Button variant="info"onClick={() =>dispatch(addRviewAsync(({rating,comment,product:prod,name:username})))} >Add</Button>
 
         

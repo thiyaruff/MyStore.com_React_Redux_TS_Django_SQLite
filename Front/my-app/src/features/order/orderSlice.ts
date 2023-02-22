@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import Order from '../../model/Order';
 import { addOrder, getMyOrder } from './orderAPI';
 
@@ -48,7 +49,12 @@ interface OrderState {
     }).addCase(getMyOrderAsync.fulfilled, (state,action) => {
         state.order=action.payload
         console.log("order",state.order)
-      });
+      }).addCase(getMyOrderAsync.rejected, (state,action) => {
+        toast.error('you have no orders', {
+          position: toast.POSITION.TOP_CENTER
+          })
+      })
+    
     },
     });
     

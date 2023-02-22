@@ -4,6 +4,7 @@ import { login, newLogin, refreshUser } from './loginAPI';
 import IloginState from '../../model/Ilogin'
 import jwt_decode from "jwt-decode";
 import Ilogin from '../../model/Ilogin';
+import { toast } from 'react-toastify';
 
 
 
@@ -65,13 +66,19 @@ builder
   .addCase(loginAsync.fulfilled, (state, action) => {
   const decoded:any = jwt_decode(action.payload.access);
   state.logged=true
-  localStorage.setItem('refresh', action.payload.refresh)
+  // localStorage.setItem('refresh', action.payload.refresh)
   localStorage.setItem('access', action.payload.access)
   console.log(action.payload.access)
   state.userName=decoded.username
   state.user_id=decoded.user_id
   state.access=action.payload.access
   state.refresh=action.payload.refresh
+  toast.success(`Welcome ${state.userName}`)
+})
+  .addCase(loginAsync.rejected, (state, action) => {
+  toast.error('Password or Username Incorrect', {
+  position: toast.POSITION.TOP_CENTER
+  })
 })
 .addCase(refreshAsync.fulfilled, (state, action) => {
   console.log(action.payload)
@@ -87,6 +94,12 @@ builder
   state.logged=true
   state.userName=action.payload.username
   console.log(state.userName)
+  toast.success(`Welcome ${state.userName}`)
+})
+.addCase(newLoginAsync.rejected, (state, action) => {
+  toast.error('Password or Username Incorrect', {
+  position: toast.POSITION.TOP_CENTER
+  })
 })
 }
 });

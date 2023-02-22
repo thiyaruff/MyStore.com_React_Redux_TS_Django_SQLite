@@ -12,8 +12,8 @@ export function addOrder(creds:any) {
 }
 
 export function getMyOrder() {
-  return new Promise<{ data: any }>((resolve) =>
+  return new Promise<{ data: any }>((resolve,reject) =>
       axios.get(SERVER+"getOrders/",{headers:{'Authorization': `Bearer ${localStorage.getItem('access')}`
-    } }).then(res => resolve({ data: res.data }))
+    } }).then(res => resolve({ data: res.data })).catch((error)=>reject(error.data))
   );
 }

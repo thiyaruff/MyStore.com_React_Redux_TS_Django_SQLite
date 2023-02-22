@@ -2,6 +2,10 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { logout, newLoginAsync, refreshAsync, selectLogged, selectUserName } from "./loginSlice";
+import{toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cart from '../shop_cart/Cart';
+import { Link, redirect } from 'react-router-dom';
 const Register = () => {
     const [username, setuname] = useState("")
     const [password, setpassword] = useState("")
@@ -19,11 +23,9 @@ const Register = () => {
     }, [])
     return (
         <div>
-            {logged ? <div>
-                Hi {userName},{" "}
-                <button onClick={() => dispatch(logout())}>Logout</button>
-            </div> :
-                <div>
+            <ToastContainer/>
+        
+            <div style={logged ? { display:"none" } : {}}>
                     <h1 style={{ textAlign: "center" }}>Welcome a new user:
                     </h1>
                     <hr />
@@ -67,7 +69,7 @@ const Register = () => {
                     </Form>
                    
                     <Button onClick={() => dispatch(newLoginAsync({ username, password, email,address,phone_number,age }))}>Sign in</Button>
-                </div>}
+                </div>
           
         </div>
     );

@@ -3,7 +3,8 @@ import { addOrderAsync, getMyOrderAsync, selectOrder } from './orderSlice';
 import { Button, Stack } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectAccess, selectLogged, selectUserName, selectUser_id } from '../Login/loginSlice';
-
+import{ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Order = () => {
     const logged = useAppSelector(selectLogged);
@@ -16,7 +17,9 @@ const Order = () => {
     const dispatch = useAppDispatch();
 
     return (
+        
         <div style={{ padding: "20px" }}>
+            <ToastContainer/>
              {logged && <div>hi, {username} get your order:
                 <Button onClick={() => dispatch(getMyOrderAsync())}>get order</Button>
       {myOrder.map((p: any, i: Number) => <div key={`key-${i}`}>
