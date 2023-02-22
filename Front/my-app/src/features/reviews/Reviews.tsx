@@ -1,42 +1,50 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, InputGroup } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import PaypalPage from "../../componnents/PaypalPage";
 import Products from "../adminProducts/Products";
 import { selectProduct } from "../adminProducts/productsSlice";
-import { loginAsync, logout, newLoginAsync, refreshAsync, selectAccess, selectLogged, selectUserName, selectUser_id } from "../Login/loginSlice";
-import Register from "../Login/Register";
+import { loginAsync, logout, refreshAsync, selectAccess, selectLogged, selectUserName, selectUser_id } from "../Login/loginSlice";
+import { getMyOrderAsync, selectOrder } from '../order/orderSlice';
 import { addRviewAsync } from "./reviewsSlice";
 
 
 const Reviews = () => {
-const dispatch = useAppDispatch();
-const logged = useAppSelector(selectLogged);
-const [rating, setRating] = useState(0)
-const [comment, setComment] = useState("")
-const [prod, setProd] = useState(0)
+  const dispatch = useAppDispatch();
+  const logged = useAppSelector(selectLogged);
+  const myOrder = useAppSelector(selectOrder);
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState("")
+  const [prod, setProd] = useState(0)
 
 
-const access= useAppSelector(selectAccess)
-const username= useAppSelector(selectUserName)
-const product=useAppSelector(selectProduct)
+  const access = useAppSelector(selectAccess)
+  const username = useAppSelector(selectUserName)
+  const product = useAppSelector(selectProduct)
 
-useEffect(() => {
+  useEffect(() => {
 
-  const tmp: any = localStorage.getItem('refresh')
-  { tmp && dispatch(refreshAsync(tmp)) }
-}, [])
+    const tmp: any = localStorage.getItem('refresh')
+    { tmp && dispatch(refreshAsync(tmp)) }
+    dispatch(getMyOrderAsync())
+  }, [])
+
+  useEffect(() => {
 
 
-      
-    
-     
+    dispatch(getMyOrderAsync())
+  }, [])
+
+
+
+
+
   return (
-   
-   
-      <div>
-        {logged &&<div>
+
+
+    <div>
+
+      {logged &&<div>
         hi {username}
                     <h1 style={{ textAlign: "center" }}>Reviews:
                     </h1>
@@ -56,14 +64,13 @@ useEffect(() => {
                         
                         </Col>
                     </Form>
-                    <select onChange={(e) => setProd(+e.target.value)}>{product.map(p => <option key={p.id} value={p.id}>{p.desc}</option>)}</select>
+                    <select onChange={(e) => setProd(+e.target.value)}>{myOrder.map((p:any)=><option key={p.id} value={p.product}>{p.desc}</option>)} </select>
                     <Button variant="info"onClick={() =>dispatch(addRviewAsync(({rating,comment,product:prod,name:username})))} >Add</Button>
 
-
+        
     </div>}
-   
     </div>
-    
+
   );
 }
 

@@ -3,7 +3,7 @@ import { addOrderAsync, getMyOrderAsync, selectOrder } from './orderSlice';
 import { Button, Stack } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectAccess, selectLogged, selectUserName, selectUser_id } from '../Login/loginSlice';
-import PaypalPage from '../../componnents/PaypalPage';
+
 
 const Order = () => {
     const logged = useAppSelector(selectLogged);
@@ -25,9 +25,8 @@ const Order = () => {
                     {/* <button onClick={()=>dispatch(addProd({item:p,amount:-1}))}>-</button> */}
                 </div>)}
         </div>}
-        
-        <PaypalPage/>
-        
+  
+       
         </div>
 
     )

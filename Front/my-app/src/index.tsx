@@ -15,6 +15,7 @@ import Register from './features/Login/Register';
 import Profile from './features/profile/Profile';
 import Reviews from './features/reviews/Reviews';
 import Order from './features/order/Order';
+import PaypalPage from './componnents/PaypalPage';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
@@ -33,6 +34,7 @@ root.render(
         <Route path="/Profile" element={<Profile />}> </Route>
         <Route path="/Reviews" element={<Reviews />} />
         <Route path="/Order" element={<Order />} /> 
+        <Route path="/PaypalPage" element={<PaypalPage />} /> 
         </Route>  
        
       </Routes>

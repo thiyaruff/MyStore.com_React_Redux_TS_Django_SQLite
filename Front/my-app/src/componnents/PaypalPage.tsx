@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useAppSelector } from '../app/hooks';
-import { selectTotal } from '../features/shop_cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { selectCart, selectTotal} from '../features/shop_cart/cartSlice';
+import { addOrderAsync } from '../features/order/orderSlice';
+import { Button } from 'react-bootstrap';
 
 
 const PaypalPage = () => {
   const total = useAppSelector(selectTotal)
+  const myCart = useAppSelector(selectCart);
+ const dispatch =useAppDispatch
+
   return (
     <div>
       <PayPalScriptProvider options={{ "client-id": "AW2uNoVhNxnT6sADpEH5QPkZ3o4DemFCY0ByJe75xQjZNpsH8Mhj5pYK-qikuz_SJcSipvbbjd4lmowW" }}>
@@ -23,14 +28,10 @@ const PaypalPage = () => {
                   const name = details.payer.name.given_name;
                   alert("Transaction completed by " + name);
               }}
-                // onApprove={(data:any, actions:any) => {
-                //   return actions.order.capture().then((details:any) => {
-                //       const name = details.payer.name.given_name;
-                //       alert(`Transaction completed by ${name}`);
-                //   });
-              // }} 
+              
                  />
       </PayPalScriptProvider>
+
     </div>
   )
 }

@@ -144,13 +144,12 @@ class CreateCategoryView(APIView):
         serializer = CategorySerializer(my_model, many=True)
         return Response(serializer.data)
 
-
 #///////////////////order////////////////////////////////////////
 
 @api_view(['POST'])
 def order(request):
-    print(request.data['total'])
-    api_serializer=OrderSerializer(data={}, context={'user':request.user})
+    total=request.data['total']
+    api_serializer=OrderSerializer(data={'total': total}, context={'user':request.user})
     if api_serializer.is_valid():
             api_serializer.save()
     else:
@@ -160,8 +159,9 @@ def order(request):
 
     order_id = Order.objects.latest('id').id
     print(order_id)
+    items=request.data['myCart']
 # items
-    for i in request.data:
+    for i in items:
         product = i['id']
         order=order_id
         desc=i['desc']
@@ -178,6 +178,8 @@ def order(request):
             print('***************ORDER-ITEM******************')
     
     return HttpResponse (serializer.errors)
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getMyOrders(request):
@@ -186,6 +188,13 @@ def getMyOrders(request):
     orders =  OrderItem.objects.filter(order__user=user)
     serializer = OrderItemSerializer(orders, many=True)
     return Response(serializer.data)
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def getAllordersDetails(request):
+#     orders = Order.objects.filter(user=request.user)
+#     serializer = OrderSerializer(orders, many=True)
+#     return Response(serializer.data)
    
 
 
@@ -205,6 +214,7 @@ def createProductReview(request, pk):
     user = request.user
     product = Products.objects.get(id=pk)
     data = request.data
+    print(data)
 
     # 1 - Review already exists
     alreadyExists = product.review_set.filter(user=user).exists()
