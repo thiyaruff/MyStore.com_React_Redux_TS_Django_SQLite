@@ -3,14 +3,17 @@ import './App.css';
 import Products from './features/adminProducts/Products';
 import Shop from './features/shop_cart/Shop';
 import MyNav from './componnents/MyNav';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet, redirect } from 'react-router-dom';
 import Footer from './componnents/Footer';
 import { Carousel, Container } from 'react-bootstrap';
-
+import image from '../src/image/shopping.jpg'
+import cart from '../src/image/cart.jpg'
+import Image from 'react-bootstrap/Image'
 
 
   
 function App() {
+
   return (<div>
      
   
@@ -24,40 +27,34 @@ function App() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src=""
+          src={image} height=" 500px"
           alt="First slide"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3></h3><br></br>
+          <h3 style={{color:'aqua'}}><Link
+                    to={redirect ? `/ProductAdmin?redirect=${redirect}` : '/ProductAdmin'}>
+                  Design your ecommerce
+                </Link></h3>
+          
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
+          src={cart}  height=" 500px"
           alt="Second slide"
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3 style={{textDecoration: 'none',color:'black'}}><Link
+                    to={redirect ? `/Cart?redirect=${redirect}` : '/Cart'}>
+                    Start Shopping
+                </Link></h3>
+       
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
-          alt="Third slide"
-        />
 
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
     </Carousel>
     </main><Footer /></>
   
