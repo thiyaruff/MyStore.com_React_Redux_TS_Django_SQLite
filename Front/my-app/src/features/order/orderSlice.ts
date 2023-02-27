@@ -46,6 +46,13 @@ interface OrderState {
     .addCase(addOrderAsync.fulfilled, (state, action) => {
       // localStorage.removeItem("cart")
       
+        })
+        .addCase(addOrderAsync.rejected, (state, action) => {
+          // localStorage.removeItem("cart")
+          toast.error('please login', {
+            position: toast.POSITION.TOP_CENTER
+            })
+      
     }).addCase(getMyOrderAsync.fulfilled, (state,action) => {
         state.order=action.payload
         console.log("order",state.order)

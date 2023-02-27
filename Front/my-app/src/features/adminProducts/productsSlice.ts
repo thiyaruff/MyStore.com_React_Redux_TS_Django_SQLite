@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import Products from '../../model/Products';
-import { addProduct, getAllProducts,  delProduct, updProduct} from './productsAPI';
+import { addProduct, getAllProducts,  delProduct, updProduct, getNextProds} from './productsAPI';
 
 interface ProductsState {
-  status: 'idle' | 'loading' | 'failed';
-  products: Products[]
+
+  products:Products[]
+  
 }
 const initialState: ProductsState = {
-  status: 'idle',
-  products: []
+ 
+  products:[]
 };
 
 
@@ -29,6 +30,8 @@ export const getAllProductsAsync = createAsyncThunk(
       return response.data;
   }
 );
+
+
 export const delProductAsync = createAsyncThunk(
   'products/delProduct',
   async (id:number ) => {
@@ -56,11 +59,12 @@ export const productsSlice = createSlice({
           console.log(action.payload)
           state.products.push(action.payload)
       }).addCase(getAllProductsAsync.fulfilled, (state, action) => {
-          // console.log(action.payload)
+          console.log(action.payload)
           state.products = action.payload
-      }).addCase(delProductAsync.fulfilled, (state, action) => {
-          // console.log(action.payload)
-          state.products =state.products.filter(pro => pro.id !== action.payload)
+      })
+      .addCase(delProductAsync.fulfilled, (state, action) => {
+          console.log(action.payload)
+          state.products=state.products.filter(pro => pro.id !== action.payload)
       }).addCase(updProductAsync.fulfilled, (state, action) => {
           console.log(action.payload.id)
           const temp= state.products.filter(pro => pro.id === action.payload.id)[0]

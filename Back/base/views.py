@@ -14,6 +14,8 @@ from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponse, JsonResponse
+from rest_framework.pagination import PageNumberPagination
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -73,6 +75,16 @@ def get1Product(request, pk):
         serializer = ProductSerializer(product, many=False)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getallProductPaging(request):
+        paginator = PageNumberPagination()
+        paginator.page_size = 5 
+        my_model = Products.objects.all()
+        result_page = paginator.paginate_queryset(my_model, request)
+        serializer = ProductSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+
 class APIViews(APIView):
     parser_class=(MultiPartParser,FormParser)
     def post(self,request,*args,**kwargs):
@@ -84,13 +96,13 @@ class APIViews(APIView):
         else:
             print('error',api_serializer.errors)
             return Response(api_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
-
+     
     def get(self, request,  format=None):
-        my_model = Products.objects.all()
-        serializer = ProductSerializer(my_model, many=True)
+        print(request.data)
+        product =Products.objects.all()
+        serializer = ProductSerializer(product, many=False)
         return Response(serializer.data)
-
+        
     def delete(self, request, id, format=None):
         try:
             my_data =Products.objects.get(id=id)

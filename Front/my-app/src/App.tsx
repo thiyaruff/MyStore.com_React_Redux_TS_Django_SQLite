@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Products from './features/adminProducts/Products';
-import Shop from './features/shop_cart/Shop';
 import MyNav from './componnents/MyNav';
 import { Link, Outlet, redirect } from 'react-router-dom';
 import Footer from './componnents/Footer';

@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addReview } from './reviewsAPI';
+import { addReview, getReviewsPerProduct } from './reviewsAPI';
 import jwt_decode from "jwt-decode"
 import Reviews from '../../model/Reviews';
+import { toast } from 'react-toastify';
+import { RootState } from '../../app/store';
 
 
 export interface ReviewsState {
@@ -28,6 +30,13 @@ export const addRviewAsync = createAsyncThunk(
       return response.data;
   }
 );
+export const getReviewsPerProductAsync = createAsyncThunk(
+    'reviews/getReviewsPerProduct', 
+    async (pk: number) => {
+        const response = await getReviewsPerProduct(pk);
+        return response.data;
+    }
+)
 
 
 export const reviewsSlice = createSlice({
@@ -42,16 +51,24 @@ export const reviewsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addRviewAsync.fulfilled, (state, action) => {
-     
+        toast.success(`Thank you`)
      
   
-  });
+  }).addCase(addRviewAsync.rejected, (state, action) => {
+    toast.error(`you allready sent review of this product`)
+     
+  
+  })
+  .addCase(getReviewsPerProductAsync.fulfilled, (state, action: { payload: { id:number } }) => {
+    console.log(action.payload)
+})
       
    
 }
 });
 
 export const { } =reviewsSlice.actions;
+export const selectReview = (state: RootState) => state.reviews.review;
 export default reviewsSlice.reducer;
 
 

@@ -6,6 +6,7 @@ urlpatterns = [
     path('register', views.register),
     path('', views.index),
     path('get1Product/<int:pk>', views.get1Product),
+    path('getallProduct/', views.getallProductPaging),
     path('products/',views.APIViews.as_view()),
     path('products/<int:id>',views.APIViews.as_view()),
     path('addreviews/<str:pk>', views.createProductReview, name="create-review"),

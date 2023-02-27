@@ -14,6 +14,12 @@ export function getAllProducts() {
         axios.get(SERVER+"products/").then(res => resolve({ data: res.data }))
     );
 }
+export function getNextProds(creds:string) {
+    return new Promise<{ data: any }>((resolve) =>
+    axios.get(creds)
+        .then((res) => resolve({ data: res.data }))
+    );
+  }
 
 export function delProduct(id: number) {
     return new Promise<{ data: number }>((resolve) =>

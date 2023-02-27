@@ -1,5 +1,5 @@
 
-import { delProductAsync, getAllProductsAsync, selectProduct, updProductAsync } from './productsSlice';
+import { delProductAsync, updProductAsync } from './productsSlice';
 import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import axios from 'axios';
@@ -9,7 +9,10 @@ import { useSelector } from 'react-redux';
 import Category from '../category/Category';
 
 import Pagination from 'react-bootstrap/Pagination';
-import { Rating, Typography } from '@mui/material';
+import { Rating } from '@mui/material';
+import { getAllProductsPagingAsync, getMoreProdsAsync, selectProduct } from '../Paging/pagingSlice';
+
+
 
 
 
@@ -17,24 +20,10 @@ import { Rating, Typography } from '@mui/material';
 
 
 const Products = () => {
-//   let active =1;
-// let items = [];
-// for (let number = 1; number <= 5; number++) {
-//   items.push(
-//     <Pagination.Item key={number} active={number === active}>
-//       {number}
-//     </Pagination.Item>,
-//   );
-// }
-//   const paginationBasic = (
-//     <div>
-//       <Pagination>{items}</Pagination>
-//       <br />
-//     </div>
-//   );
+
   const prod = useAppSelector(selectProduct);
   const dispatch = useAppDispatch();
-  useEffect(() => { dispatch(getAllProductsAsync()) }, [])
+  useEffect(() => { dispatch(getAllProductsPagingAsync()) }, [])
   useEffect(() => {
       
     dispatch(getCatsAsync())
@@ -98,10 +87,11 @@ const Products = () => {
             <select onChange={(e) => setcategory(+e.target.value)}>{categories.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select>
         <Button variant="info" type="submit">Add Product</Button>
       </form>
+      
       {imagePreviewUrl && <img src={imagePreviewUrl as string} alt="product" width="150" height="150" />}
 <br></br>
       <Row xs={3} md={4} className="g-4">
-        {prod.map((product, index) =>
+        {prod.results && prod.results.map((product:any, index:any) =>
           <div key={index}>
             <Col>
               <Card border="primary" style={{ width: '18rem' }}>
@@ -116,7 +106,11 @@ const Products = () => {
             </Col>
           </div>)}
       </Row>
-      {/* {paginationBasic} */}
+      <div style={{ justifyContent: "space-around", display: 'flex' }}>
+        {prod.previous && <Button variant="primary" onClick={() => dispatch(getMoreProdsAsync(prod.previous))}>previous page</Button>}
+        <Button variant="primary" onClick={() => dispatch(getMoreProdsAsync(prod.next))}>next page</Button>             
+      </div>
+     
     </div>
 
   );

@@ -3,10 +3,15 @@ import { selectCart, initCart, selectupdCartFlag, addProd, selectTotal, updateTo
 import { useSelector } from 'react-redux';
 import { Button, Card, Col, Offcanvas, Row, Stack } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectAccess, selectLogged, selectUserName, selectUser_id } from '../Login/loginSlice';
+import {  selectLogged, selectUserName } from '../Login/loginSlice';
 import { addOrderAsync, getMyOrderAsync } from '../order/orderSlice';
-import { getAllProductsAsync, selectProduct } from '../adminProducts/productsSlice';
+import { getAllProductsAsync } from '../adminProducts/productsSlice';
 import { Link, redirect } from 'react-router-dom';
+import { Rating } from '@mui/material';
+import { selectProduct } from '../Paging/pagingSlice';
+import{ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Cart = () => {
 
@@ -35,13 +40,13 @@ const Cart = () => {
 
 
         <div style={{ display: "flex" }}>
-
+<ToastContainer/>
             <div style={{ padding: "20px" }}>
                 <Button variant="primary" onClick={handleShow}>
                     Check Out
                 </Button>
                 <div style={{ width: "60%" }}> <Row xs={3} md={4} className="g-4">
-                    {prod.map((product, index) =>
+                    {prod.results && prod.results.map((product:any, index:any) =>
                         <div key={index}>
 
 
@@ -54,6 +59,7 @@ const Cart = () => {
                                             {product.price}
                                         </Card.Text>
                                     </Card.Body>
+                                    <Rating name="read-only" value={product.rating} readOnly />
                                     <Button onClick={() => dispatch(addProd({ item: product, amount: 1 }))}>+</Button>
                                     <Button variant="danger" onClick={() => dispatch(addProd({ item: product, amount: -1 }))}>-</Button>
                                 </Card>
@@ -78,9 +84,8 @@ const Cart = () => {
                             <Stack gap={3} style={{ border: 50 }}>
 
                                 {myCart.map((p: any, i: Number) => <div key={`key-${i}`}>
-                                    {/* <button onClick={()=>dispatch(addProd({item:p,amount:+1}))}>+</button> */}
                                     <div className="bg-light border"></div> {p.desc} {p.price}  Amount:{p.amount}
-                                    {/* <button onClick={()=>dispatch(addProd({item:p,amount:-1}))}>-</button> */}
+                                   
                                 </div>)} </Stack>
                             <div><br />
                                 Total: {total}<br /></div>
@@ -96,10 +101,8 @@ const Cart = () => {
                 </>
                 <Stack gap={3} style={{ border: 50 }}>
 
-                    {myCart.map((p: any, i: Number) => <div key={`key-${i}`}>
-                        {/* <button onClick={()=>dispatch(addProd({item:p,amount:+1}))}>+</button> */}
+                    {myCart.map((p: any, i: Number) => <div key={p.id}>
                         <div className="bg-light border"></div> {p.desc} {p.price}  Amount:{p.amount}
-                        {/* <button onClick={()=>dispatch(addProd({item:p,amount:-1}))}>-</button> */}
                     </div>)} </Stack>
                     
 

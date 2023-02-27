@@ -8,7 +8,6 @@ import './bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Products from './features/adminProducts/Products';
-import Shop from './features/shop_cart/Shop';
 import { Login } from './features/Login/Login';
 import Cart from './features/shop_cart/Cart';
 import Register from './features/Login/Register';

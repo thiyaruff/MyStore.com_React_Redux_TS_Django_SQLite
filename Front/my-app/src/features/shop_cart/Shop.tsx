@@ -1,27 +1,27 @@
 import React from 'react'
-import { getAllProductsAsync,selectProduct } from '../adminProducts/productsSlice';
-import  { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import { selectLogged,selectAccess } from '../Login/loginSlice';
-import { addProd, initCart } from './cartSlice';
-import Cart from './Cart';
-import { Link } from 'react-router-dom';
+// import { getAllProductsAsync,selectProduct } from '../adminProducts/productsSlice';
+// import  { useEffect, useState } from 'react';
+// import { useAppSelector, useAppDispatch } from '../../app/hooks';
+// import Card from 'react-bootstrap/Card';
+// import Col from 'react-bootstrap/Col';
+// import Row from 'react-bootstrap/Row';
+// import Button from 'react-bootstrap/Button';
+// import { selectLogged,selectAccess } from '../Login/loginSlice';
+// import { addProd, initCart } from './cartSlice';
+// import Cart from './Cart';
+// import { Link } from 'react-router-dom';
 const Shop = () => {
-    const prod = useAppSelector(selectProduct);
-  const dispatch = useAppDispatch();
-  const logged = useAppSelector(selectLogged);
-  const access = useAppSelector(selectAccess);
-  useEffect(() => { dispatch(getAllProductsAsync()) }, []) 
-  useEffect(() => {dispatch(initCart())}, [dispatch])
+  //   const prod = useAppSelector(selectProduct);
+  // const dispatch = useAppDispatch();
+  // const logged = useAppSelector(selectLogged);
+  // const access = useAppSelector(selectAccess);
+  // useEffect(() => { dispatch(getAllProductsAsync()) }, []) 
+  // useEffect(() => {dispatch(initCart())}, [dispatch])
   
   return (
     <div style={{display:"flex"}}>
    
-      <div><Cart></Cart></div>
+      {/* <div><Cart></Cart></div>
        <div style={{width:"60%"}}> <Row xs={3} md={4} className="g-4">
  {prod.map((product, index) =>
                 <div key={index}>
@@ -46,7 +46,7 @@ const Shop = () => {
                 </div>)}
                 </Row>
     
-                </div>
+                </div> */}
     </div>
   )
 }

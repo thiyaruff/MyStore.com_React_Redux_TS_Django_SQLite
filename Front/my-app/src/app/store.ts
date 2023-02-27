@@ -6,6 +6,7 @@ import categoryReducer from '../features/category/categorySlice';
 import profileReducer from '../features/profile/profileSlice';
 import reviewsReducer from '../features/reviews/reviewsSlice';
 import OrderReducer from '../features/order/orderSlice';
+import pagingReducer from '../features/Paging/pagingSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     profile:profileReducer,
     reviews:reviewsReducer,
     order:OrderReducer,
+    paging:pagingReducer,
 
     
   },

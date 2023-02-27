@@ -4,7 +4,8 @@ import { addCategoryAsync, getCatsAsync, selectCategory } from './categorySlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 import { getAllProducts } from '../adminProducts/productsAPI';
-import { getAllProductsAsync, selectProduct } from '../adminProducts/productsSlice';
+import { getAllProductsAsync } from '../adminProducts/productsSlice';
+import { selectProduct } from '../Paging/pagingSlice';
 
 
 const Category = () => {
@@ -17,14 +18,14 @@ const Category = () => {
   useEffect(() => {
 
     dispatch(getCatsAsync())
-    dispatch(getAllProductsAsync())
+    // dispatch(getAllProductsAsync())
   }, [dispatch])
   return (
     <div>
       <p>Choosh category to see the products: </p>
  <select onChange={(e) => setcategory(+e.target.value)}>{categories.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select>
  <Row xs={3} md={4} className="g-4">
-        {products.map((product, index) =>
+        {products.results && products.results.map((product:any, index:any) =>
           <div key={index}>{product.category===category &&
             <Col>
               <Card border="primary" style={{ width: '18rem' }}>
