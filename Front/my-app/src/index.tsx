@@ -16,7 +16,6 @@ import Reviews from './features/reviews/Reviews';
 import Order from './features/order/Order';
 import PaypalPage from './componnents/PaypalPage';
 import Home from './componnents/Home';
-import MyNav from './componnents/MyNav';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 

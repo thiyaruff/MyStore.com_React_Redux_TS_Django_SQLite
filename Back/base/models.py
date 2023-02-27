@@ -1,5 +1,6 @@
 
 
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -18,6 +19,8 @@ class CustomUser(AbstractUser):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    def __str__(self):
+           return self.name
 
 class Products(models.Model):
     desc = models.CharField(max_length=50,null=True,blank=True)
@@ -44,7 +47,7 @@ class Review(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
-    order_date = models.DateTimeField(auto_now_add = True)
+    order_date = models.DateTimeField(default=datetime.now)
     address = models.CharField(max_length = 100, null = True, blank = True)
     city = models.CharField(max_length = 100, null = True, blank = True)
     country = models.CharField(max_length = 50, null =True, blank = True)

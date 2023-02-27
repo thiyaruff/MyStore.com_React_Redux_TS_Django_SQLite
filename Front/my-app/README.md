@@ -1,4 +1,4 @@
-# MyStore.com_React_Redux_TS_Django_SQLite
+# MyStore.com_React_Redux_TS_Django
 
 This is a web application built with React, Redux, TypeScript, Django, and SQLite. The app allows users to buy and sell items online.
 
@@ -14,7 +14,7 @@ Order history page
 # Technologies
 Django 
 React-Redux-Typescript
-SQLite3
+SQLite3 /postgres
 
 # Program that you need to install before 
 Please check that you have the following installed on your local machine:
@@ -55,8 +55,15 @@ run the following command in your Terminal in order to install 'virtualenv':
 To access the admin panel of Django, use the following credentials:
 
 Username: thiya
-Password: 1234
+Password: 123
 
-Contact
+# To use postgres:
+install postgres and pgadmin
+username:thiya/postgres
+password:thiya123
+
+password of db 'myShop' :0526070373 
+
+# Contact
 If you have any questions or comments about this project, please feel free to contact me at:
 <thiyaruff@gmail.com>.

@@ -49,7 +49,7 @@ interface OrderState {
         })
         .addCase(addOrderAsync.rejected, (state, action) => {
           // localStorage.removeItem("cart")
-          toast.error('please login', {
+          toast.error('please login or make an order', {
             position: toast.POSITION.TOP_CENTER
             })
       
