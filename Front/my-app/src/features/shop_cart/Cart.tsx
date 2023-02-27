@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 import { Button, Card, Col, Offcanvas, Row, Stack } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {  selectLogged, selectUserName } from '../Login/loginSlice';
-import { addOrderAsync, getMyOrderAsync } from '../order/orderSlice';
-import { getAllProductsAsync } from '../adminProducts/productsSlice';
+import { addOrderAsync } from '../order/orderSlice';
 import { Link, redirect } from 'react-router-dom';
 import { Rating } from '@mui/material';
-import { selectProduct } from '../Paging/pagingSlice';
+import { selectProducts, getAllProductsPagingAsync } from '../Paging/pagingSlice';
 import{ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const Cart = () => {
@@ -19,13 +19,14 @@ const Cart = () => {
     const total = useAppSelector(selectTotal)
     const username = useAppSelector(selectUserName)
     const myCart = useSelector(selectCart);
-    const prod = useAppSelector(selectProduct);
+    const prod = useAppSelector(selectProducts);
     const dispatch = useAppDispatch();
     const logged = useAppSelector(selectLogged);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    useEffect(() => { dispatch(getAllProductsAsync()) }, [])
+    useEffect(() => { dispatch(getAllProductsPagingAsync(true))
+      console.log('cart',prod)  },  [dispatch])
     useEffect(() => { dispatch(initCart()) }, [dispatch])
     useEffect(() => {
         let total = 0
@@ -39,14 +40,14 @@ const Cart = () => {
     return (
 
 
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex",backgroundColor:"aqua" }}>
 <ToastContainer/>
             <div style={{ padding: "20px" }}>
                 <Button variant="primary" onClick={handleShow}>
                     Check Out
                 </Button>
-                <div style={{ width: "60%" }}> <Row xs={3} md={4} className="g-4">
-                    {prod.results && prod.results.map((product:any, index:any) =>
+                <div > <Row xs={3} md={4} className="g-4">
+                    {prod.map((product:any, index:any) =>
                         <div key={index}>
 
 

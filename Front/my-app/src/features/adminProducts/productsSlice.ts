@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import Products from '../../model/Products';
-import { addProduct, getAllProducts,  delProduct, updProduct, getNextProds} from './productsAPI';
+import { addProduct,  delProduct, updProduct} from './productsAPI';
 
 interface ProductsState {
 
@@ -19,14 +19,6 @@ export const addProductAsync = createAsyncThunk(
   async (newProduct: Products) => {
 
       const response = await  addProduct(newProduct);
-      return response.data;
-  }
-);
-
-export const getAllProductsAsync = createAsyncThunk(
-  'products/getAllProducts',
-  async () => {
-      const response = await getAllProducts();
       return response.data;
   }
 );
@@ -58,14 +50,10 @@ export const productsSlice = createSlice({
       builder.addCase(addProductAsync.fulfilled, (state, action) => {
           console.log(action.payload)
           state.products.push(action.payload)
-      }).addCase(getAllProductsAsync.fulfilled, (state, action) => {
-          console.log(action.payload)
-          state.products = action.payload
       })
-      .addCase(delProductAsync.fulfilled, (state, action) => {
-          console.log(action.payload)
-          state.products=state.products.filter(pro => pro.id !== action.payload)
-      }).addCase(updProductAsync.fulfilled, (state, action) => {
+      
+     
+      .addCase(updProductAsync.fulfilled, (state, action) => {
           console.log(action.payload.id)
           const temp= state.products.filter(pro => pro.id === action.payload.id)[0]
           temp.price=action.payload.price

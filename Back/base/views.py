@@ -77,12 +77,24 @@ def get1Product(request, pk):
 
 @api_view(['GET'])
 def getallProductPaging(request):
-        paginator = PageNumberPagination()
-        paginator.page_size = 5 
-        my_model = Products.objects.all()
-        result_page = paginator.paginate_queryset(my_model, request)
-        serializer = ProductSerializer(result_page, many=True)
-        return paginator.get_paginated_response(serializer.data)
+    if request.method == 'GET':
+        all_products = Products.objects.all()
+        if 'all' in request.query_params and request.query_params['all'] == 'true':
+            serializer = ProductSerializer(all_products, many=True)
+            return Response(serializer.data)
+        else:
+            paginator = PageNumberPagination()
+            paginator.page_size = 5
+            result_page = paginator.paginate_queryset(all_products, request)
+            serializer = ProductSerializer(result_page, many=True)
+            paginated_data = serializer.data
+            return Response({
+                'count': paginator.page.paginator.count,
+                'next': paginator.get_next_link(),
+                'previous': paginator.get_previous_link(),
+                'results': paginated_data
+            })
+        
 
 
 class APIViews(APIView):
@@ -97,11 +109,11 @@ class APIViews(APIView):
             print('error',api_serializer.errors)
             return Response(api_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
      
-    def get(self, request,  format=None):
-        print(request.data)
-        product =Products.objects.all()
-        serializer = ProductSerializer(product, many=False)
-        return Response(serializer.data)
+    # def get(self, request, *args,**kwargs):
+    #     print(request.data)
+    #     product =Products.objects.all()
+    #     serializer = ProductSerializer(product, many=False)
+    #     return Response(serializer.data)
         
     def delete(self, request, id, format=None):
         try:

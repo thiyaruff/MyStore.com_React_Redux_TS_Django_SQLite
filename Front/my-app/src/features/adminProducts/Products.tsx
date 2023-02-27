@@ -7,10 +7,8 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import { getCatsAsync, selectCategory } from '../category/categorySlice';
 import { useSelector } from 'react-redux';
 import Category from '../category/Category';
-
-import Pagination from 'react-bootstrap/Pagination';
 import { Rating } from '@mui/material';
-import { getAllProductsPagingAsync, getMoreProdsAsync, selectProduct } from '../Paging/pagingSlice';
+import { getAllProductsPagingAsync, getMoreProdsAsync, selectProducts } from '../Paging/pagingSlice';
 
 
 
@@ -21,9 +19,10 @@ import { getAllProductsPagingAsync, getMoreProdsAsync, selectProduct } from '../
 
 const Products = () => {
 
-  const prod = useAppSelector(selectProduct);
+  const prod = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
-  useEffect(() => { dispatch(getAllProductsPagingAsync()) }, [])
+  useEffect(() => { dispatch(getAllProductsPagingAsync())
+     console.log('prod',prod) }, [])
   useEffect(() => {
       
     dispatch(getCatsAsync())

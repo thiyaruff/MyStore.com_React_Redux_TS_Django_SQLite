@@ -23,8 +23,9 @@ const  MyNav = () => {
     
     <div>
  <Navbar bg="dark" variant="dark" style={{
-borderBottom: "solid 1px", paddingBottom: "1rem", color:"white" }} expand="lg" collapseOnSelect>
+borderBottom: "solid 1px", paddingBottom: "1rem", color:"white", textDecoration: "none" }} expand="lg" collapseOnSelect>
              <Nav className="me-auto">
+             <Link to={"/home"}>Home Page</Link>|{" "}
               <Link to={"/ProductAdmin"}>ProductAdmin</Link>|{" "}
             <Link to="/Cart"><i className="fas fa-shopping-cart"></i>Cart</Link>|{" "}
             <Link to={"/Reviews"}>Reviews</Link>|{" "}  
@@ -43,7 +44,7 @@ borderBottom: "solid 1px", paddingBottom: "1rem", color:"white" }} expand="lg" c
                                         <Link to='/login'><i className="fas fa-user"></i>Login</Link>
                                  
                                 )}
-            {/* <Login></Login> */}
+            
            
            </Nav> 
         </Navbar>

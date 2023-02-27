@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import Products from '../../model/Products';
 import {  getAllProducts, getNextProds} from './pagingAPI';
 
 interface ProductsState {
@@ -16,9 +15,9 @@ const initialState: ProductsState = {
 
 
 export const getAllProductsPagingAsync = createAsyncThunk(
-  'paiging/getAllProducts',
-  async () => {
-      const response = await getAllProducts();
+  'paging/getAllProducts',
+  async (allProducts:boolean = false) => {
+      const response = await getAllProducts(allProducts);
       return response.data;
   }
 );
@@ -42,10 +41,11 @@ export const pagingSlice = createSlice({
   },
   extraReducers: (builder) => {
       builder.addCase(getAllProductsPagingAsync.fulfilled, (state, action) => {
-          console.log(action.payload)
+        
           state.products = action.payload
+          console.log(state.products)
       }).addCase(getMoreProdsAsync.fulfilled, (state, action) => {
-        console.log('getmore',action.payload)
+
         state.products=action.payload
         })
      
@@ -53,7 +53,7 @@ export const pagingSlice = createSlice({
 });
 
 export const { } = pagingSlice.actions;
-export const selectProduct = (state: RootState) => state.paging.products;
+export const selectProducts = (state: RootState) => state.paging.products;
 export default pagingSlice.reducer;
 
 

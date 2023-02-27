@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 import { addCategoryAsync, getCatsAsync, selectCategory } from './categorySlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
-import { getAllProducts } from '../adminProducts/productsAPI';
-import { getAllProductsAsync } from '../adminProducts/productsSlice';
-import { selectProduct } from '../Paging/pagingSlice';
+import { selectProducts } from '../Paging/pagingSlice';
 
 
 const Category = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategory);
-  const products = useAppSelector(selectProduct);
+  const products = useAppSelector(selectProducts);
   const [name, setname] = useState("")
   const [category, setcategory] = useState(0)
 

@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { MY_SERVER, SERVER } from '../../server';
+import {  SERVER } from '../../server';
 import Products from '../../model/Products';
 
 export function addProduct(pro: Products) {
@@ -9,11 +9,7 @@ export function addProduct(pro: Products) {
     );
 }
 
-export function getAllProducts() {
-    return new Promise<{ data: Products[] }>((resolve) =>
-        axios.get(SERVER+"products/").then(res => resolve({ data: res.data }))
-    );
-}
+
 export function getNextProds(creds:string) {
     return new Promise<{ data: any }>((resolve) =>
     axios.get(creds)
