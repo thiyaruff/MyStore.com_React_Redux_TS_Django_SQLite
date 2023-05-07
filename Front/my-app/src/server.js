@@ -1,2 +1,2 @@
-export const MY_SERVER= "http://localhost:3000/products"
-export const SERVER= "http://127.0.0.1:8000/"
+export const MY_SERVER= "https://thiyaruff-store3.onrender.com/products"
+export const SERVER= "https://thiyaruff-store3.onrender.com/"

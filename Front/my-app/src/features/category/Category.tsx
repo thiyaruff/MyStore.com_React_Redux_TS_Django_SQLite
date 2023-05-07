@@ -28,7 +28,7 @@ const Category = () => {
               <Card border="primary" style={{ width: '18rem' }}>
               <Card.Title>{product.desc}</Card.Title>
               Price:{product.price} 
-              <Card.Img variant="top" src={'http://127.0.0.1:8000' + product.image} height="200" />
+              <Card.Img variant="top" src={'https://thiyaruff-store3.onrender.com' + product.image} height="200" />
              
              
               </Card>

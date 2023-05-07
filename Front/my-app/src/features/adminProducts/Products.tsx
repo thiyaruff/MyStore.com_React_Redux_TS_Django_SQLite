@@ -96,7 +96,7 @@ const Products = () => {
               <Card border="primary" style={{ width: '18rem' }}>
               <Card.Title>{product.desc}</Card.Title>
               Price:{product.price} 
-              <Card.Img variant="top" src={'http://127.0.0.1:8000' + product.image} height="200" />
+              <Card.Img variant="top" src={'https://thiyaruff-store3.onrender.com' + product.image} height="200" />
               <Rating name="read-only" value={product.rating} readOnly />
               <Button variant="primary" onClick={() => dispatch(updProductAsync({ price,id:product.id}))} >upd</Button>
               <Button variant="danger" onClick={() => dispatch(delProductAsync(product.id || -1))} >Del</Button>
