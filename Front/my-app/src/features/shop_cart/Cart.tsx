@@ -53,7 +53,7 @@ const Cart = () => {
 
                             <Col>
                                 <Card border="primary" style={{ width: "100%" }}>
-                                    <Card.Img variant="top" src={'http://127.0.0.1:8000' + product.image} width="100px" height="100" />
+                                    <Card.Img variant="top" src={'https://thiyaruff-store3.onrender.com' + product.image} width="100px" height="100" />
                                     <Card.Body>
                                         <Card.Title>{product.desc}</Card.Title>
                                         <Card.Text>
